@@ -26,6 +26,8 @@ int LockLibraryIntoProcessMem(HMODULE dllHandle, HMODULE* localDllHandle)
 
 EELibrary::EELibrary()
 {
+    return;
+
     Logger::Init("Library");
 
     Logger::Info("============================================================");

@@ -5,6 +5,7 @@
 using namespace eelib::mod;
 
 Mod::Mod(const char* name)
+    : OnProgramLoaded {}
 {
     _implem = new Pimpl();
     _implem->_name = name;

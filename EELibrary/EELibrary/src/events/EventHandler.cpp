@@ -18,3 +18,8 @@ void EventHandler::unregisterAll()
 {
     _implem->m_Listeners.clear();
 }
+
+eelib::events::EventHandler::Pimpl::Pimpl()
+    : m_Listeners()
+{
+}

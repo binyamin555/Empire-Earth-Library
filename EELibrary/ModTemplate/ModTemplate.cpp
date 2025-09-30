@@ -3,6 +3,11 @@
 #include "ModTemplate.h"
 #include <iostream>
 
+#include "LLE.h"
+#include "Logger.h"
+
+
+
 MOD_NAME::MOD_NAME(void)
     : eelib::mod::Mod(MOD_NAME_STRING)
 {
@@ -29,6 +34,7 @@ public:
 bool MOD_NAME::OnStart()
 {
     OnProgramLoaded.registerListener<eelib::events::ProgramLoadedEvent>(new EventListenerExample());
+
     return true;
 }
 
@@ -46,6 +52,10 @@ bool MOD_NAME::OnUpdate()
                 At any time, you can call SetRunning(false)
                 This will stop the thread at the end of the current loop
         */
+
+        if (gISMouse != nullptr)
+            if (gISMouse->currentDeltaPtr->left)
+                eelib::Logger::Info("Button clicked!");
 
         Sleep(MOD_UPDATE_INTERVAL);
     }

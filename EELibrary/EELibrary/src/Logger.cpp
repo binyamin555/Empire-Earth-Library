@@ -5,6 +5,7 @@
 #include <spdlog/sinks/rotating_file_sink.h>
 
 namespace eelib {
+
 std::shared_ptr<spdlog::logger> Logger::_libLogger;
 
 void Logger::Init(const char* name)
@@ -59,7 +60,7 @@ void Logger::Init(const char* name)
     spdlog::set_default_logger(_libLogger);
     _libLogger->set_pattern("[%H:%M:%S] [%n] [%^%L%$] [thread %t] %v");
     _libLogger->set_level(spdlog::level::trace);
-    _libLogger->sinks().push_back(std::make_shared<spdlog::sinks::rotating_file_sink_mt>("Mods/Library.log", (1024 * 1024) * 5, 3, false));
+    //_libLogger->sinks().push_back(std::make_shared<spdlog::sinks::rotating_file_sink_mt>("Mods/Library.log", (1024 * 1024) * 5, 3, false));
 }
 
 void Logger::Uninit()

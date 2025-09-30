@@ -89,6 +89,8 @@ namespace events {
     private:
         struct Pimpl {
             std::unordered_map<EventID, IEventListenerPtrList> m_Listeners;
+
+            Pimpl();
         };
         Pimpl* _implem;
     };

@@ -7,47 +7,59 @@ namespace eelib {
 // LoggerManager Class
 // We need to don't expose spdlog to the user, so we create a wrapper class.
 
+
 class Logger {
 private:
-    static std::shared_ptr<spdlog::logger> _libLogger;
+#ifdef EE_COMPILE_EE_LIBRARY
+    static __declspec(dllexport) std::shared_ptr<spdlog::logger> _libLogger;
+#else
+    static __declspec(dllimport) std::shared_ptr<spdlog::logger> _libLogger;
+#endif // EE_COMPILE_EE_LIBRARY
+
 
 public:
     static void Init(const char* name);
     static void Uninit();
 
     template <typename... Args>
-    static void Trace(const char* fmt, const Args&... args)
+    static inline void Trace(const char* fmt, const Args&... args)
     {
+        if (_libLogger == nullptr) return;
         _libLogger->trace(fmt, args...);
     }
 
     template <typename... Args>
-    static void Debug(const char* fmt, const Args&... args)
+    static inline void Debug(const char* fmt, const Args&... args)
     {
+        if (_libLogger == nullptr) return;
         _libLogger->debug(fmt, args...);
     }
 
     template <typename... Args>
-    static void Info(const char* fmt, const Args&... args)
+    static inline void Info(const char* fmt, const Args&... args)
     {
+        if (_libLogger == nullptr) return;
         _libLogger->info(fmt, args...);
     }
 
     template <typename... Args>
-    static void Warn(const char* fmt, const Args&... args)
+    static inline void Warn(const char* fmt, const Args&... args)
     {
+        if (_libLogger == nullptr) return;
         _libLogger->warn(fmt, args...);
     }
 
     template <typename... Args>
-    static void Error(const char* fmt, const Args&... args)
+    static inline void Error(const char* fmt, const Args&... args)
     {
+        if (_libLogger == nullptr) return;
         _libLogger->error(fmt, args...);
     }
 
     template <typename... Args>
-    static void Critical(const char* fmt, const Args&... args)
+    static inline void Critical(const char* fmt, const Args&... args)
     {
+        if (_libLogger == nullptr) return;
         _libLogger->critical(fmt, args...);
     }
 };
