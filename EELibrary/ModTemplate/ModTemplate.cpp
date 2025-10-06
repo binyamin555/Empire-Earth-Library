@@ -3,8 +3,11 @@
 #include "ModTemplate.h"
 #include <iostream>
 
-#include "LLE.h"
+#include "framework/low-level engine.h"
 #include "Logger.h"
+
+#include "game-data/options.h"
+#include "modding-api/events.h"
 
 
 
@@ -18,22 +21,11 @@ MOD_NAME::~MOD_NAME(void)
 {
 }
 
-class EventListenerExample : public eelib::events::EventListener<eelib::events::ProgramLoadedEvent> {
-public:
-    virtual void onScoppedEvent(eelib::events::ProgramLoadedEvent& programLoadedEvent) override
-    {
-        /*std::cout << "Program loaded: " << programLoadedEvent.getNumber() << " | " << programLoadedEvent.getString() << " | " << programLoadedEvent.isCanceled() << std::endl;
-        programLoadedEvent.setNumber(42);
-        programLoadedEvent.setString("Hello World!");
-        programLoadedEvent.setCanceled(true);
-        std::cout << "Program loaded: " << programLoadedEvent.getNumber() << " | " << programLoadedEvent.getString() << " | " << programLoadedEvent.isCanceled() << std::endl;*/
-        std::cout << "Program loaded" << std::endl;
-    }
-};
-
 bool MOD_NAME::OnStart()
 {
-    OnProgramLoaded.registerListener<eelib::events::ProgramLoadedEvent>(new EventListenerExample());
+    ee::events::OnProgramLoaded += []() {
+        std::cout << "Program loaded" << std::endl;
+	};
 
     return true;
 }
@@ -55,7 +47,10 @@ bool MOD_NAME::OnUpdate()
 
         if (gISMouse != nullptr)
             if (gISMouse->currentDeltaPtr->left)
+            {
                 eelib::Logger::Info("Button clicked!");
+                eelib::Logger::Info(ee::options::PlayerName->string);
+            }
 
         Sleep(MOD_UPDATE_INTERVAL);
     }

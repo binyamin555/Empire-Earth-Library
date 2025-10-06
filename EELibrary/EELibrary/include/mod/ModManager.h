@@ -30,12 +30,11 @@ namespace mod {
         void UnloadAllMods();
 
         bool IsModLoaded(const char* modPath) const;
+        bool IsModLoaded(std::string modName) const;
 
         void InitMod(Mod* mod);
         void StartMod(Mod* mod);
         void StopMod(Mod* mod);
-
-        eelib::events::ProgramLoadedEvent globalShit = eelib::events::ProgramLoadedEvent();
     };
 
 }

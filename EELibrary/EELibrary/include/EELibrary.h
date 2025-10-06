@@ -39,4 +39,4 @@ private:
 };
 }
 
-static std::unique_ptr<eelib::EELibrary> instance;
+extern EELIBRARY_API std::unique_ptr<eelib::EELibrary> instance;

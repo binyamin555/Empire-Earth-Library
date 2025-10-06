@@ -74,6 +74,12 @@ bool ModManager::IsModLoaded(const char* modName) const
     return iter != _implem->m_Mods.end();
 }
 
+bool ModManager::IsModLoaded(std::string modName) const
+{
+    auto iter = _implem->m_Mods.find(modName);
+    return iter != _implem->m_Mods.end();
+}
+
 void ModManager::UnloadMod(Mod* mod)
 {
     if (mod == nullptr)

@@ -31,20 +31,20 @@ void Logger::Init(const char* name)
     // TODO: Hook lol
     CreateThread(
         NULL, NULL, [](LPVOID) -> DWORD {
-            bool visible = false;
+            bool visible = true;
 
             while (true) {
                 if (GetAsyncKeyState(VK_F5) & 1)
                     visible = !visible;
 
-                if (!visible) {
+                if (visible) {
                     HWND consoleWindow = GetConsoleWindow();
                     if (consoleWindow != NULL) {
                         // Set the console as FUllscreen overlay and topmost and semi-transparent
-                        SetWindowLong(consoleWindow, GWL_EXSTYLE, WS_EX_LAYERED | WS_EX_TOPMOST | WS_EX_TRANSPARENT);
-                        SetLayeredWindowAttributes(consoleWindow, 0, static_cast<BYTE>(0.70 * 255), LWA_ALPHA);
-                        SetConsoleDisplayMode(GetStdHandle(STD_OUTPUT_HANDLE), CONSOLE_FULLSCREEN_MODE, NULL);
-                        SetWindowPos(consoleWindow, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+                        //SetWindowLong(consoleWindow, GWL_EXSTYLE, WS_EX_LAYERED | WS_EX_TOPMOST | WS_EX_TRANSPARENT);
+                        //SetLayeredWindowAttributes(consoleWindow, 0, static_cast<BYTE>(0.70 * 255), LWA_ALPHA);
+                        //SetConsoleDisplayMode(GetStdHandle(STD_OUTPUT_HANDLE), CONSOLE_FULLSCREEN_MODE, NULL);
+                        //SetWindowPos(consoleWindow, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
                     }
                 } else {
                     ShowWindow(GetConsoleWindow(), SW_HIDE);

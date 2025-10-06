@@ -157,3 +157,5 @@ BOOL EELibrary::RegisterMainEndHook(LPVOID pHook)
     Logger::Trace("Registered main end hook");
     return TRUE;
 }
+
+std::unique_ptr<eelib::EELibrary> instance;

@@ -65,7 +65,7 @@
       <AdditionalDependencies>$(ProjectDir)lib\DX7\lib\ddraw.lib;$(ProjectDir)lib\DX7\lib\dxguid.lib;$(ProjectDir)lib\MinHook\lib\libMinHook-x86-v141-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)Debug\EELibrary.dll" "G:\Empire Earth\Empire Earth"</Command>
+      <Command>copy "$(SolutionDir)Debug\EELibrary.dll" "P:\Empire Earth\Empire Earth"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -92,7 +92,7 @@
       <AdditionalDependencies>$(ProjectDir)lib\DX7\lib\ddraw.lib;$(ProjectDir)lib\DX7\lib\dxguid.lib;$(ProjectDir)lib\MinHook\lib\libMinHook-x86-v141-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)Debug\EELibrary.dll" "G:\Empire Earth\Empire Earth"</Command>
+      <Command>copy "$(SolutionDir)Debug\EELibrary.dll" "P:\Empire Earth\Empire Earth"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -108,7 +108,24 @@
     <ClInclude Include="include\exceptions\ModManagerException.h" />
     <ClInclude Include="include\exceptions\mod\ModInitException.h" />
     <ClInclude Include="include\framework.h" />
+    <ClInclude Include="include\framework\low-level engine.h" />
+    <ClInclude Include="include\framework\low-level engine\game-engine\2d\point.h" />
+    <ClInclude Include="include\framework\low-level engine\game-engine\3d\line.h" />
+    <ClInclude Include="include\framework\low-level engine\game-engine\3d\point.h" />
+    <ClInclude Include="include\framework\low-level engine\game-engine\3d\vector.h" />
+    <ClInclude Include="include\framework\low-level engine\game-engine\transformation.h" />
+    <ClInclude Include="include\framework\low-level engine\helpers\registry.h" />
+    <ClInclude Include="include\framework\low-level engine\input-system\mouse.h" />
+    <ClInclude Include="include\framework\low-level engine\string\string.h" />
+    <ClInclude Include="include\framework\low-level engine\string\wide-string.h" />
+    <ClInclude Include="include\framework\low-level engine\task-scheduler\critical-section.h" />
+    <ClInclude Include="include\framework\low-level engine\task-scheduler\scheduler.h" />
+    <ClInclude Include="include\game-data\options.h" />
+    <ClInclude Include="include\modding-api\.h" />
+    <ClInclude Include="include\core\event.h" />
     <ClInclude Include="include\gui_tests.h" />
+    <ClInclude Include="include\framework\low-level engine\.h" />
+    <ClInclude Include="include\modding-api\events.h" />
     <ClInclude Include="include\pch.h" />
     <ClInclude Include="include\mod\Version.h" />
     <ClInclude Include="include\events\program\ProgramLoadedEvent.h" />
@@ -117,11 +134,13 @@
     <ClInclude Include="include\Memory.h" />
     <ClInclude Include="include\Utils.h" />
     <ClInclude Include="include\Logger.h" />
+    <ClInclude Include="include\utils\memory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\events\EventHandler.cpp" />
     <ClCompile Include="src\Logger.cpp" />
     <ClCompile Include="src\Memory.cpp" />
+    <ClCompile Include="src\modding-api\events.cpp" />
     <ClCompile Include="src\mod\ModManager.cpp" />
     <ClCompile Include="src\mod\Mod.cpp" />
     <ClCompile Include="src\EELibrary.cpp" />

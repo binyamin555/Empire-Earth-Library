@@ -3,6 +3,9 @@
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/spdlog.h>
 
+#include "EELibraryExports.h"
+
+
 namespace eelib {
 // LoggerManager Class
 // We need to don't expose spdlog to the user, so we create a wrapper class.
@@ -10,11 +13,7 @@ namespace eelib {
 
 class Logger {
 private:
-#ifdef EE_COMPILE_EE_LIBRARY
-    static __declspec(dllexport) std::shared_ptr<spdlog::logger> _libLogger;
-#else
-    static __declspec(dllimport) std::shared_ptr<spdlog::logger> _libLogger;
-#endif // EE_COMPILE_EE_LIBRARY
+    static EELIBRARY_API std::shared_ptr<spdlog::logger> _libLogger;
 
 
 public:

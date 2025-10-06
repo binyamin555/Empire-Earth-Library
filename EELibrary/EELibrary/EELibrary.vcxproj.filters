@@ -33,12 +33,6 @@
     <ClInclude Include="include\events\program\ProgramLoadedEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\mod\Mod.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\mod\ModManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\Memory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -46,9 +40,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\exceptions\CoreException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\exceptions\core\CoreInitException.h">
@@ -60,15 +51,6 @@
     <ClInclude Include="include\Logger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\exceptions\ModException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\exceptions\mod\ModInitException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\exceptions\ModManagerException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\events\EventHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -76,6 +58,78 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\events\IEventListener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mod\Mod.h">
+      <Filter>Header Files\Modding System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\exceptions\ModException.h">
+      <Filter>Header Files\Modding System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\exceptions\mod\ModInitException.h">
+      <Filter>Header Files\Modding System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mod\ModManager.h">
+      <Filter>Header Files\Modding System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\exceptions\ModManagerException.h">
+      <Filter>Header Files\Modding System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\event.h">
+      <Filter>Header Files\Event System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\utils\memory.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\game-data\options.h">
+      <Filter>Header Files\Game Data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\framework\low-level engine\.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\framework\low-level engine\game-engine\3d\point.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\framework\low-level engine\game-engine\3d\vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\framework\low-level engine\game-engine\2d\point.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\framework\low-level engine\game-engine\3d\line.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\framework\low-level engine\game-engine\transformation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\framework\low-level engine\task-scheduler\critical-section.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\framework\low-level engine\task-scheduler\scheduler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\framework\low-level engine\string\wide-string.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\framework\low-level engine\helpers\registry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\framework\low-level engine\input-system\mouse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\framework\low-level engine\string\string.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\framework\low-level engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\modding-api\events.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\modding-api\.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

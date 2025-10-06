@@ -2,8 +2,6 @@
 
 #include "EELibraryExports.h"
 #include "Memory.h"
-#include "events/program/ProgramLoadedEvent.h"
-#include "events/EventHandler.h"
 #include "mod/Version.h"
 
 namespace eelib {
@@ -57,10 +55,6 @@ namespace mod {
                 So... Again don't do any heavy work here :)
         */
         virtual bool OnStop() = 0;
-
-        // --- Events ---
-    public:
-        eelib::events::EventHandler OnProgramLoaded;
 
     protected:
         friend class ModManager; // Allow ModManager to access to protected methods
