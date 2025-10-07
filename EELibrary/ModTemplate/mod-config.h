@@ -1,9 +1,11 @@
 #pragma once
 
-#include <mod/Mod.h>
+#include <modding/mod.h>
 
-#define MOD_NAME ModTemplate
-#define MOD_NAME_STRING "Mod Template"
+#define EE_MOD ModTemplate
+#define MOD_NAME "Mod Template"
+
+#define MOD_CLASS_NAME EE_MOD
 
 /*
         Sleep is required to prevent the thread from using too much CPU
@@ -35,7 +37,3 @@
 #if MOD_VERSION_MAJOR > 255 || MOD_VERSION_MINOR > 255 || MOD_VERSION_PATCH > 255
 #error "MOD_VERSION_MAJOR, MOD_VERSION_MINOR and MOD_VERSION_PATCH must be less than 256."
 #endif
-
-extern "C" MODTEMPLATE_API int GetLibraryVersion();
-extern "C" MODTEMPLATE_API eelib::mod::Mod* CreateMod(void);
-extern "C" MODTEMPLATE_API void DestroyMod(void);

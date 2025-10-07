@@ -13,6 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Modding System">
+      <UniqueIdentifier>{1402809f-fa71-4df0-ba8f-19cb35b3c708}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{574733a7-9308-450e-a6c7-fc0bc566f922}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Event System">
+      <UniqueIdentifier>{59edca1d-adaa-4eec-bdf6-902e953f0325}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game Events">
+      <UniqueIdentifier>{d641affe-6ad9-4bad-b629-8bd50e34038b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Events">
+      <UniqueIdentifier>{2d6c8487-7e7f-4911-9371-f61f6a99dd50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game Data">
+      <UniqueIdentifier>{66298990-bcc3-49f2-9a5e-3d049ca99758}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\framework.h">
@@ -21,16 +39,7 @@
     <ClInclude Include="include\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\mod\Version.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\EELibrary.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\events\Event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\events\program\ProgramLoadedEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Memory.h">
@@ -51,32 +60,14 @@
     <ClInclude Include="include\Logger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\events\EventHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\events\EventID.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\events\IEventListener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\mod\Mod.h">
-      <Filter>Header Files\Modding System</Filter>
-    </ClInclude>
     <ClInclude Include="include\exceptions\ModException.h">
       <Filter>Header Files\Modding System</Filter>
     </ClInclude>
     <ClInclude Include="include\exceptions\mod\ModInitException.h">
       <Filter>Header Files\Modding System</Filter>
     </ClInclude>
-    <ClInclude Include="include\mod\ModManager.h">
-      <Filter>Header Files\Modding System</Filter>
-    </ClInclude>
     <ClInclude Include="include\exceptions\ModManagerException.h">
       <Filter>Header Files\Modding System</Filter>
-    </ClInclude>
-    <ClInclude Include="include\core\event.h">
-      <Filter>Header Files\Event System</Filter>
     </ClInclude>
     <ClInclude Include="include\Utils.h">
       <Filter>Header Files\Utils</Filter>
@@ -132,6 +123,51 @@
     <ClInclude Include="include\modding-api\.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\modding\core.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\modding\instance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\modding\.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\modding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\modding\event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\modding\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\modding\manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\modding\mod.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\modding\version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\modding\module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\modding\compatibility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\modding\lifetime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\modding\update-loop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\modding\loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\modding\loaders\basic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dllmain.cpp">
@@ -140,16 +176,7 @@
     <ClCompile Include="src\pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\mod\Version.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\EELibrary.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mod\Mod.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mod\ModManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Memory.cpp">
@@ -158,7 +185,37 @@
     <ClCompile Include="src\Logger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\events\EventHandler.cpp">
+    <ClCompile Include="src\game-events\GameEvents.cpp">
+      <Filter>Source Files\Game Events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\modding-api\events.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\modding\instance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\modding\core.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\modding\resource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\modding\mod.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\modding\compatibility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\modding\manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\modding\version.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\modding\update-loop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\modding\loaders\basic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

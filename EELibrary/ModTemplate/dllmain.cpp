@@ -1,34 +1,33 @@
 /*
 
-        You should not need to modify anything in this file.
+        You should not need to modify anything in this file, 
+		except the include of your mod main header file.
 
+        Just replace "ModTemplate.h" with your mod main header file.
+        Also replace "MOD_CLASS_NAME" with the name of your mod main class.
 */
 
 #include "pch.h"
 
-#include "ModTemplate.h"
+#include "ModTemplate.h" // Replace with your mod main header
+
 #include <cassert>
 
-static MOD_NAME* g_ModInstance = NULL;
 
-extern "C" MODTEMPLATE_API int GetLibraryVersion()
-{
-    return EELIBRARY_VERSION;
+// ------------- Mod Manifest -------------
+
+#include "modding/lifetime.h"
+
+CREATE_MOD() {
+    return new MOD_CLASS_NAME();
 }
 
-extern "C" MODTEMPLATE_API eelib::mod::Mod* CreateMod(void)
-{
-    assert(g_ModInstance == NULL);
-    g_ModInstance = new MOD_NAME();
-    return g_ModInstance;
+DESTROY_MOD(MODDING_CORE_NAMESPACE::Mod* mod) {
+    delete mod;
 }
 
-extern "C" MODTEMPLATE_API void DestroyMod()
-{
-    assert(g_ModInstance != NULL);
-    delete g_ModInstance;
-    g_ModInstance = NULL;
-}
+// ----------------------------------------
+
 
 /*
     Historically, Empire Earth mods DLLs took advantage of DllMain

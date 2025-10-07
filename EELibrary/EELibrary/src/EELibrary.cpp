@@ -1,12 +1,15 @@
 #include "pch.h"
 
 #include "EELibrary.h"
-#include "Logger.h"
-#include "Memory.h"
-#include "Utils.h"
 #include <exceptions/ModManagerException.h>
 #include <exceptions/core/CoreInitException.h>
 #include <sstream>
+
+#include "Logger.h"
+#include "Memory.h"
+
+#include "modding/loaders/basic.h"
+#include "utils/utils.h"
 
 using namespace eelib;
 
@@ -26,8 +29,6 @@ int LockLibraryIntoProcessMem(HMODULE dllHandle, HMODULE* localDllHandle)
 
 EELibrary::EELibrary()
 {
-    return;
-
     Logger::Init("Library");
 
     Logger::Info("============================================================");
@@ -38,18 +39,18 @@ EELibrary::EELibrary()
 #ifdef _DEBUG
     Logger::Trace("Initializing Memory Leak Detection...");
 
-    _leakLogFile = CreateFile(L"__leak.txt", GENERIC_WRITE,
-        FILE_SHARE_WRITE, NULL, CREATE_ALWAYS,
-        FILE_ATTRIBUTE_NORMAL, NULL);
+    //_leakLogFile = CreateFile(L"__leak.txt", GENERIC_WRITE,
+    //    FILE_SHARE_WRITE, NULL, CREATE_ALWAYS,
+    //    FILE_ATTRIBUTE_NORMAL, NULL);
 
-    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF | _CRTDBG_CHECK_ALWAYS_DF | _CRTDBG_DELAY_FREE_MEM_DF);
+    //_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF | _CRTDBG_CHECK_ALWAYS_DF | _CRTDBG_DELAY_FREE_MEM_DF);
 
-    _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_FILE | _CRTDBG_MODE_DEBUG);
-    _CrtSetReportFile(_CRT_ERROR, _leakLogFile);
-    _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE | _CRTDBG_MODE_DEBUG);
-    _CrtSetReportFile(_CRT_WARN, _leakLogFile);
-    _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE | _CRTDBG_MODE_DEBUG);
-    _CrtSetReportFile(_CRT_ASSERT, _leakLogFile);
+    //_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_FILE | _CRTDBG_MODE_DEBUG);
+    //_CrtSetReportFile(_CRT_ERROR, _leakLogFile);
+    //_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE | _CRTDBG_MODE_DEBUG);
+    //_CrtSetReportFile(_CRT_WARN, _leakLogFile);
+    //_CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE | _CRTDBG_MODE_DEBUG);
+    //_CrtSetReportFile(_CRT_ASSERT, _leakLogFile);
 
     Logger::Trace("Initialized Memory Leak Detection");
 #endif // _DEBUG
@@ -60,7 +61,7 @@ EELibrary::EELibrary()
     Logger::Trace("Initialized Memory");
 
     Logger::Trace("Initializing ModManager...");
-    _modManager = std::make_unique<eelib::mod::ModManager>();
+    _modManager = std::make_unique<ee::modding::core::ModManager>();
     Logger::Trace("Initialized ModManager");
 }
 
@@ -75,8 +76,8 @@ EELibrary::~EELibrary()
     Logger::Uninit();
 
 #ifdef _DEBUG
-    _CrtCheckMemory();
-    _CrtDumpMemoryLeaks();
+    //_CrtCheckMemory();
+    //_CrtDumpMemoryLeaks();
     CloseHandle(_leakLogFile);
 #endif // _DEBUG
 }
@@ -89,36 +90,12 @@ void EELibrary::Init(HMODULE hModule)
     if (LockLibraryIntoProcessMem(_hinst, &_hself) != ERROR_SUCCESS)
         throw CoreInitException("Failed to lock library into process memory");
 
+	ee::modding::loader::Loader& loader = *new ee::modding::loader::BasicLoader();
+
     if (!FolderExist(_modPath))
         return;
 
-    std::vector<std::filesystem::path> modPaths;
-    for (const auto& entry : std::filesystem::directory_iterator(_modPath))
-        if (entry.is_regular_file() && entry.path().extension() == ".dll")
-            modPaths.push_back(entry.path());
-
-    for (const auto& path : modPaths) {
-        mod::Mod* mod = nullptr;
-        try {
-            Logger::Info("Loading mod {}...", path.filename().string());
-            mod = _modManager->LoadMod(path.string().c_str());
-            Logger::Info("Loaded mod {} v{}", mod->GetName(), mod->GetVersion().GetString());
-
-            Logger::Info("Initializing mod {}...", mod->GetName());
-            _modManager->InitMod(mod);
-            Logger::Info("Initialized mod {}", mod->GetName());
-
-            Logger::Info("Starting mod {}...", mod->GetName());
-            _modManager->StartMod(mod);
-            Logger::Info("Started mod {}", mod->GetName());
-        } catch (mod::ModManagerException& e) {
-            Logger::Error("Failed to load mod {}: {}", path.filename().string(), e.what());
-            MessageBoxA(NULL, e.what(), "EE Library", MB_OK);
-            if (mod != nullptr && _modManager->IsModLoaded(mod->GetPath()))
-                _modManager->UnloadMod(mod);
-            continue;
-        }
-    }
+	loader.Load(_modPath);
 }
 
 void EELibrary::Run()
@@ -138,6 +115,11 @@ void EELibrary::Exit()
 std::unique_ptr<memory::Memory>& EELibrary::GetMemory()
 {
     return _memory;
+}
+
+std::unique_ptr<ee::modding::core::ModManager>& eelib::EELibrary::GetModManager()
+{
+    return _modManager;
 }
 
 BOOL EELibrary::RegisterMainHook(LPVOID pHook)

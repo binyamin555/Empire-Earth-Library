@@ -1,10 +1,11 @@
 #pragma once
 
-#include "Logger.h"
-#include "Memory.h"
-#include "mod/ModManager.h"
 #include <atomic>
 #include <functional>
+
+#include "Logger.h"
+#include "Memory.h"
+#include "modding/manager.h"
 
 namespace eelib {
 class EELibrary {
@@ -23,12 +24,12 @@ public:
     void Exit();
 
     std::unique_ptr<memory::Memory>& GetMemory();
-    std::unique_ptr<mod::ModManager>& GetModManager();
+    std::unique_ptr<ee::modding::core::ModManager>& GetModManager();
 
 private:
     std::unique_ptr<memory::Memory> _memory;
 
-    std::unique_ptr<mod::ModManager> _modManager;
+    std::unique_ptr<ee::modding::core::ModManager> _modManager;
     const wchar_t* _modPath = L"Mods";
 
     HMODULE _hinst;

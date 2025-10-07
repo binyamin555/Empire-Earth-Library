@@ -2,7 +2,7 @@
 
 #include ".h"
 
-#include "core/event.h"
+#include "modding/event.h"
 
 
 namespace ee::events {

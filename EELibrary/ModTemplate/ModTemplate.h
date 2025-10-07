@@ -1,13 +1,15 @@
 #pragma once
 
-#include "ModExports.h"
+#include "modding.h"
 
-class MODTEMPLATE_API MOD_NAME : public eelib::mod::Mod {
+#include "mod-config.h"
+
+class MOD_CLASS_NAME : public ee::modding::core::Mod {
 public:
-    MOD_NAME(void);
-    ~MOD_NAME(void);
+    MOD_CLASS_NAME(void);
+    ~MOD_CLASS_NAME(void);
 
-    bool OnStart();
-    bool OnUpdate();
-    bool OnStop();
+    bool OnStart() override;
+    DWORD OnUpdate() override;
+    void OnStop() override;
 };
