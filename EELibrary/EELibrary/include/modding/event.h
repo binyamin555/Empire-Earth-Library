@@ -18,7 +18,16 @@ struct Event {
 
 	inline EventSubscription Subscribe(std::function<void(Ts...)> func) {
 		EventSubscription token = nextToken++;
-		callbacks[token] = func;
+
+		auto& currentMod = GetCurrentlyRunningMod();
+		callbacks[token] = [currentMod](Ts... args) {
+			auto& previousMod = GetCurrentlyRunningMod();
+			SetCurrentlyRunningMod(currentMod);
+
+			func(args...);
+
+			SetCurrentlyRunningMod(previousMod);
+		};
 
 		AddManagedResourceUnloader(
 			[this, token]() {
