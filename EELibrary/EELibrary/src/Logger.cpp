@@ -1,10 +1,35 @@
 #include "pch.h"
 
+#include "modding.h"
 #include "Logger.h"
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/rotating_file_sink.h>
 
 namespace eelib {
+
+class CurrentModNamePatternFlag : public spdlog::custom_flag_formatter {
+public:
+    void format(spdlog::details::log_msg const& msg, std::tm const& tm_time, spdlog::memory_buf_t& dest) override
+    {
+		using namespace ee::modding::core;
+
+        if (IsModCurrentlyRunning()) {
+            auto const& currentMod = GetCurrentlyRunningMod();
+            std::string modName = "Mod:";
+			modName += currentMod.GetModObject().GetName();
+            dest.append(modName.data(), modName.data() + modName.size());
+        }
+        else {
+			std::string noMod = "System";
+			dest.append(noMod.c_str(), noMod.c_str() + noMod.length());
+        }
+	}
+
+    std::unique_ptr<spdlog::custom_flag_formatter> clone() const override
+    {
+        return std::make_unique<CurrentModNamePatternFlag>();
+	}
+};
 
 std::shared_ptr<spdlog::logger> Logger::_libLogger;
 
@@ -58,7 +83,9 @@ void Logger::Init(const char* name)
 
     _libLogger = spdlog::stdout_color_mt(name, spdlog::color_mode::automatic);
     spdlog::set_default_logger(_libLogger);
-    _libLogger->set_pattern("[%H:%M:%S] [%n] [%^%L%$] [thread %t] %v");
+	auto formatter = std::make_unique<spdlog::pattern_formatter>();
+	formatter->add_flag<CurrentModNamePatternFlag>('?').set_pattern("[%H:%M:%S] [From: %?] [%^%L%$] [thread %t] %v");
+    _libLogger->set_formatter(std::move(formatter));
     _libLogger->set_level(spdlog::level::trace);
     //_libLogger->sinks().push_back(std::make_shared<spdlog::sinks::rotating_file_sink_mt>("Mods/Library.log", (1024 * 1024) * 5, 3, false));
 }
