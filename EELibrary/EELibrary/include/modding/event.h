@@ -16,11 +16,11 @@ template <typename ...Ts>
 struct Event {
 	using EventSubscription = size_t;
 
-	inline EventSubscription Subscribe(std::function<void(Ts...)> func) {
+	inline EventSubscription Subscribe(std::function<void(Ts...)> && func) {
 		EventSubscription token = nextToken++;
 
 		auto& currentMod = GetCurrentlyRunningMod();
-		callbacks[token] = [currentMod](Ts... args) {
+		callbacks[token] = [&currentMod, func](Ts... args) {
 			auto& previousMod = GetCurrentlyRunningMod();
 			SetCurrentlyRunningMod(currentMod);
 
@@ -56,8 +56,8 @@ struct Event {
 		).detach();
 	}
 
-	EventSubscription operator+=(std::function<void(Ts...)> func) {
-		return Subscribe(func);
+	EventSubscription operator+=(std::function<void(Ts...)> && func) {
+		return Subscribe(std::move(func));
 	}
 
 	void operator-=(EventSubscription token) {

@@ -15,11 +15,7 @@ extern EELIBRARY_API bool IsModCurrentlyRunning(ModInstance const& mod);
 extern EELIBRARY_API ModInstance& GetCurrentlyRunningMod();
 
 
-#ifdef EELIBRARY_INTERNAL
-
-void SetCurrentlyRunningMod(ModInstance& mod);
-
-#endif
+extern EELIBRARY_API void SetCurrentlyRunningMod(ModInstance& mod);
 
 
 MODDING_CORE_NAMESPACE_END
