@@ -14,7 +14,7 @@
 
         When the mod get unloaded the Library give 4s to the thread to exit
 */
-#define MOD_UPDATE_INTERVAL 250
+#define MOD_UPDATE_INTERVAL 10
 
 #define MOD_VERSION_MAJOR 1
 #define MOD_VERSION_MINOR 0
